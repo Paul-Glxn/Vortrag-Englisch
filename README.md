@@ -1,147 +1,154 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Staten Island — Digital Poster</title>
-  <meta name="description" content="A one-page poster about Staten Island with attractions, fast facts, population, and map. Includes German translation drawer." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg: #0f172a;
-      --card: #111827;
-      --muted: #94a3b8;
-      --text: #e5e7eb;
-      --accent: #38bdf8;
-      --accent-2: #22d3ee;
-      --ring: rgba(56,189,248,.35);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% 0%, rgba(34,211,238,.12), transparent 60%),
-                  radial-gradient(1200px 600px at 90% -10%, rgba(56,189,248,.10), transparent 60%),
-                  var(--bg);
-      color: var(--text);
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:28px}
-    header{
-      display:flex;align-items:center;gap:18px;margin:18px 0 26px 0
-    }
-    header .emoji{font-size:40px;filter: drop-shadow(0 5px 12px rgba(34,211,238,.25));}
-    h1{font-size: clamp(28px, 6vw, 56px); line-height:1.05; margin:0}
-    .subtitle{color:var(--muted);margin-top:8px;font-size:clamp(14px,2.2vw,18px)}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Staten Island — Ultimate Digital Poster</title>
+<meta name="description" content="A high-end interactive poster about Staten Island with attractions, facts, population, map, inline translations, dark/light mode, and hover animations." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #22d3ee;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
+  --neon: #0ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin:0; font-family: Inter, system-ui, sans-serif;
+  background: linear-gradient(120deg, rgba(34,211,238,.08), rgba(56,189,248,.08)),
+              radial-gradient(circle at 10% 10%, rgba(56,189,248,.2), transparent 70%),
+              var(--bg);
+  color: var(--text);
+  transition: background .5s, color .5s;
+}
+.wrap { max-width:1100px; margin:0 auto; padding:28px; }
+header { display:flex; align-items:center; gap:18px; margin:18px 0 26px 0; }
+header .emoji { font-size:50px; filter: drop-shadow(0 5px 12px rgba(34,211,248,.35)); }
+h1 { font-size: clamp(28px, 6vw, 56px); margin:0; line-height:1.05; }
+.subtitle { color: var(--muted); margin-top:8px; font-size:clamp(14px,2.2vw,18px); }
 
-    .grid{display:grid;gap:18px;grid-template-columns: repeat(12, 1fr)}
-    .card{
-      grid-column: span 12;
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-      border:1px solid rgba(148,163,184,.15);
-      border-radius: var(--radius);
-      padding: 20px 20px 18px;
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .card h2{margin:0 0 10px 0;font-size: clamp(18px, 3.2vw, 28px)}
-    .card p{margin:0;color:#d1d5db}
-    .list{display:grid; gap:10px; margin-top:6px}
-    .list li{background:rgba(15,23,42,.45); border:1px solid rgba(148,163,184,.15); padding:12px 14px; border-radius:14px}
+.grid { display:grid; gap:18px; grid-template-columns: repeat(12,1fr); }
+.card {
+  grid-column: span 12;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+  border:1px solid rgba(148,163,184,.15);
+  border-radius: var(--radius);
+  padding: 20px; 
+  box-shadow: var(--shadow);
+  position:relative;
+  overflow:hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.4); }
+.card h2 { margin:0 0 10px 0; font-size: clamp(18px, 3.2vw, 28px); cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.card p, .card li { margin:0; color:#d1d5db; }
+.list { margin-top:6px; }
+.list li { background: rgba(15,23,42,.45); border:1px solid rgba(148,163,184,.15); padding:12px 14px; border-radius:14px; margin-bottom:8px; cursor:pointer; transition: background .3s; }
+.list li:hover { background: rgba(15,23,42,.6); }
 
-    .attractions{grid-column: span 7}
-    .facts{grid-column: span 5}
-    .population{grid-column: span 5}
-    .map{grid-column: span 7}
-    .pictures{grid-column: span 12}
+.translation { display:none; margin-top:4px; font-size:14px; color: var(--accent-2); }
 
-    @media (max-width: 900px){
-      .attractions,.facts,.population,.map,.pictures{grid-column: span 12}
-    }
+.gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px; }
+.gallery img { width:100%; height:200px; object-fit:cover; border-radius:14px; border:1px solid rgba(148,163,184,.25); transition: transform .3s; }
+.gallery img:hover { transform: scale(1.05); }
 
-    .note{color: var(--muted); font-size:13px; margin-top:12px}
+.toggle-dark { position:fixed; top:16px; right:16px; background: var(--accent); color:#000; padding:10px 16px; border-radius:999px; cursor:pointer; font-weight:600; box-shadow: var(--shadow); }
 
-    .ring{
-      position:absolute; inset: -60px auto auto -60px; width:180px; height:180px; border-radius:999px;
-      background: radial-gradient(closest-side, rgba(34,211,238,.18), transparent 70%);
-      pointer-events:none; filter: blur(1px);
-    }
-    .gallery{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:12px
-    }
-    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:14px;border:1px solid rgba(148,163,184,.25);box-shadow: var(--shadow)}
-    footer{
-      text-align:center;
-      margin:40px 0 20px;
-      font-weight:700;
-      font-size:18px;
-      color:#f9fafb;
-    }
-  </style>
+footer {
+  text-align:center; margin-top:40px; font-size:18px; font-weight:800;
+  color: var(--neon); text-shadow: 0 0 8px var(--neon), 0 0 12px var(--neon);
+}
+
+.arrow { display:inline-block; transition: transform .25s ease; }
+
+@media(max-width:900px){
+  .attractions, .facts, .population, .map, .pictures{ grid-column: span 12; }
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="emoji">🗽</div>
-      <div>
-        <h1>Staten Island</h1>
-        <div class="subtitle">One of New York City's five boroughs — parks, history, and harbor views.</div>
-      </div>
-    </header>
+<button class="toggle-dark" id="darkToggle">Toggle Dark/Light</button>
 
-    <div class="grid">
-      <section class="card attractions">
-        <div class="ring"></div>
-        <h2>Top Attractions</h2>
-        <ul class="list">
-          <li><strong>Staten Island Ferry</strong> — A free boat ride that offers fantastic views of the New York skyline and the Statue of Liberty.</li>
-          <li><strong>Snug Harbor Cultural Center & Botanical Garden</strong> — A historic campus featuring gardens, art galleries, and museums.</li>
-          <li><strong>Historic Richmond Town</strong> — An open-air museum village that demonstrates life in colonial times.</li>
-          <li><strong>Fort Wadsworth & Verrazzano-Narrows Bridge</strong> — A Civil War–era fortress beneath one of the world’s longest suspension bridges.</li>
-        </ul>
-      </section>
-
-      <section class="card facts">
-        <div class="ring"></div>
-        <h2>Fast Facts</h2>
-        <ul class="list">
-          <li><strong>Nickname:</strong> Staten Island is often called “The Borough of Parks.”</li>
-          <li><strong>Highest Point in NYC:</strong> Todt Hill reaches about 410 feet (125 m).</li>
-          <li><strong>Iconic Crossing:</strong> The Verrazzano-Narrows Bridge connects Staten Island to Brooklyn.</li>
-        </ul>
-      </section>
-
-      <section class="card population">
-        <div class="ring"></div>
-        <h2>Population</h2>
-        <p>Staten Island has approximately <strong>495,747</strong> residents (2020 U.S. Census). It is the least populous of NYC’s five boroughs but one of the greenest by land area.</p>
-      </section>
-
-      <section class="card map">
-        <div class="ring"></div>
-        <h2>Where is it?</h2>
-        <p>Staten Island lies southwest of Manhattan across New York Harbor and just north of New Jersey. It is connected to Brooklyn by the Verrazzano-Narrows Bridge and to New Jersey by several smaller bridges.</p>
-        <iframe width="100%" height="300" style="border:0" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.33%2C40.47%2C-74.02%2C40.67&amp;layer=mapnik&amp;marker=40.58%2C-74.14"></iframe>
-      </section>
-
-      <section class="card pictures">
-        <div class="ring"></div>
-        <h2>Pictures</h2>
-        <div class="gallery">
-          <img src="images/IMG_2292.jpeg" alt="Staten Island Picture 1">
-          <img src="images/IMG_2293.jpeg" alt="Staten Island Picture 2">
-          <img src="images/IMG_2294.jpeg" alt="Staten Island Picture 3">
-          <img src="images/IMG_2295.jpeg" alt="Staten Island Picture 4">
-        </div>
-      </section>
+<div class="wrap">
+  <header>
+    <div class="emoji">🗽</div>
+    <div>
+      <h1>Staten Island</h1>
+      <div class="subtitle">One of New York City's five boroughs — parks, history, and harbor views.</div>
     </div>
+  </header>
 
-    <footer>
-      Erstellt von Marlon Leuchtmann, Paul Weisenbilder 8d
-    </footer>
+  <div class="grid">
+    <section class="card attractions">
+      <h2>Top Attractions <span class="arrow">▼</span></h2>
+      <ul class="list">
+        <li>Staten Island Ferry offers a free ride across New York Harbor. <span class="translation">→ Die Staten Island Fähre bietet eine kostenlose Fahrt über den New Yorker Hafen.</span></li>
+        <li>Snug Harbor Cultural Center & Botanical Garden showcase historic buildings and gardens. <span class="translation">→ Snug Harbor Cultural Center & Botanischer Garten zeigen historische Gebäude und Gärten.</span></li>
+        <li>Historic Richmond Town presents colonial life with museums and live demonstrations. <span class="translation">→ Historic Richmond Town zeigt das koloniale Leben mit Museen und Vorführungen.</span></li>
+        <li>Fort Wadsworth sits beneath the iconic Verrazzano-Narrows Bridge. <span class="translation">→ Fort Wadsworth liegt unter der berühmten Verrazzano-Narrows-Brücke.</span></li>
+      </ul>
+    </section>
+
+    <section class="card facts">
+      <h2>Fast Facts <span class="arrow">▼</span></h2>
+      <ul class="list">
+        <li>Nickname: “The Borough of Parks”. <span class="translation">→ Spitzname: „The Borough of Parks“.</span></li>
+        <li>Todt Hill is the highest natural point in NYC (~125 m). <span class="translation">→ Todt Hill ist der höchste natürliche Punkt in NYC (~125 m).</span></li>
+        <li>Verrazzano-Narrows Bridge connects Staten Island to Brooklyn. <span class="translation">→ Die Verrazzano-Narrows-Brücke verbindet Staten Island mit Brooklyn.</span></li>
+      </ul>
+    </section>
+
+    <section class="card population">
+      <h2>Population <span class="arrow">▼</span></h2>
+      <p>Approx. 495,747 (2020 Census), the least populous NYC borough. <span class="translation">→ Ca. 495.747 (Volkszählung 2020), der am wenigsten bevölkerte Bezirk NYCs.</span></p>
+    </section>
+
+    <section class="card map">
+      <h2>Where is it? <span class="arrow">▼</span></h2>
+      <p>Southwest of Manhattan, north of New Jersey, connected by bridges. <span class="translation">→ Südwestlich von Manhattan, nördlich von New Jersey, verbunden durch Brücken.</span></p>
+      <iframe width="100%" height="300" style="border:0" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.33%2C40.47%2C-74.02%2C40.67&amp;layer=mapnik&amp;marker=40.58%2C-74.14"></iframe>
+    </section>
+
+    <section class="card pictures">
+      <h2>Pictures <span class="arrow">▼</span></h2>
+      <div class="gallery">
+        <img src="IMG_2294.jpeg" alt="Image 1">
+        <img src="IMG_2292.jpeg" alt="Image 2">
+        <img src="IMG_2293.jpeg" alt="Image 3">
+        <img src="IMG_2295.jpeg" alt="Image 4">
+      </div>
+    </section>
   </div>
+</div>
+
+<footer>Erstellt Von Marlon Leuchtmann, Paul Weisenbilder 8d</footer>
+
+<script>
+const toggle = document.querySelectorAll('.list li');
+toggle.forEach(li => {
+  li.addEventListener('click', ()=> {
+    const trans = li.querySelector('.translation');
+    trans.style.display = trans.style.display === 'block' ? 'none' : 'block';
+  });
+});
+
+document.getElementById('darkToggle').addEventListener('click', ()=>{
+  document.body.classList.toggle('light-mode');
+  if(document.body.classList.contains('light-mode')){
+    document.body.style.background = '#e5e7eb';
+    document.body.style.color = '#111827';
+  } else {
+    document.body.style.background = '';
+    document.body.style.color = '';
+  }
+});
+</script>
 </body>
 </html>
