@@ -43,6 +43,8 @@ header .emoji { font-size:50px; filter: drop-shadow(0 5px 12px rgba(34,211,248,.
 h1 { font-size: clamp(28px, 6vw, 56px); margin:0; line-height:1.05; }
 .subtitle { color: var(--muted); margin-top:8px; font-size:clamp(14px,2.2vw,18px); }
 
+.hero-img { width:100%; max-height:450px; object-fit:cover; border-radius:20px; margin-bottom:24px; border:2px solid var(--accent); box-shadow: var(--shadow); }
+
 .grid { display:grid; gap:18px; grid-template-columns: repeat(12,1fr); }
 .card {
   grid-column: span 12;
@@ -100,6 +102,9 @@ footer {
       <div class="subtitle">One of New York City's five boroughs — parks, history, and harbor views.</div>
     </div>
   </header>
+
+  <!-- Hero Image -->
+  <img src="IMG_2296.jpeg" alt="Staten Island Hero" class="hero-img">
 
   <div class="grid">
     <section class="card attractions">
@@ -177,7 +182,6 @@ cards.forEach(h2 => {
       h2.querySelector('.arrow').style.transform = 'rotate(0deg)';
     }
   });
-  // start collapsed for lists/p content
   if(h2.parentElement.querySelector('.list') || h2.parentElement.querySelector('p')){
     content.style.display = 'none';
   }
