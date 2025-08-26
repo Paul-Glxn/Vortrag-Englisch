@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Staten Island — Ultimate Digital Poster</title>
+<title>Staten Island — Ultimate Digital Poster um Abschnitte zu Öffnen Doppelt klicken</title>
 <meta name="description" content="A high-end interactive poster about Staten Island with attractions, facts, population, map, inline translations, dark/light mode, and hover animations." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
