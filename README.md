@@ -3,77 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Staten Island — Digital Poster (Deluxe Max + Interactive)</title>
+  <title>Staten Island — Digital Poster</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #071020;
+      --bg: #0f172a;
+      --card: #111827;
       --muted: #94a3b8;
-      --text: #f1f5f9;
-      --accent: #38bdf8;
-      --accent-2: #22d3ee;
-      --green: #34d399;
-      --gold: #fbbf24;
-      --shadow: 0 16px 48px rgba(2,6,23,.7);
-      --radius: 16px;
+      --text: #e5e7eb;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-orange: #fb923c;
+      --accent-purple: #c084fc;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg, rgba(6,10,23,1) 0%, rgba(7,16,32,1) 40%, rgba(2,6,23,1) 100%);color:var(--text);-webkit-font-smoothing:antialiased;overflow-y:scroll}
-
-    /* subtle animated background lines */
-    body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);background-size:180px 180px;pointer-events:none;opacity:0.8;animation:moveGrid 30s linear infinite}
-    @keyframes moveGrid{from{transform:translateY(0)}to{transform:translateY(-120px)}}
-
-    .wrap{max-width:1200px;margin:20px auto;padding:28px}
-    header{display:flex;align-items:center;gap:18px;margin:8px 0 22px 0}
-    header .emoji{font-size:64px;filter: drop-shadow(0 12px 28px rgba(34,211,248,.12));transform:translateY(-2px)}
-    h1{font-size: clamp(34px, 6vw, 64px);line-height:1;margin:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .subtitle{color:var(--muted);margin-top:6px;font-size:clamp(15px,2.2vw,18px)}
+    body{
+      margin:0; font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(34,211,238,.12), transparent 60%),
+                  radial-gradient(1200px 600px at 90% -10%, rgba(56,189,248,.10), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;gap:18px;margin:18px 0 26px 0}
+    header .emoji{font-size:46px;filter: drop-shadow(0 5px 12px rgba(34,211,238,.25));}
+    h1{font-size: clamp(28px, 6vw, 56px); line-height:1.05; margin:0}
+    .subtitle{color:var(--muted);margin-top:8px;font-size:clamp(14px,2.2vw,18px)}
 
     .grid{display:grid;gap:18px;grid-template-columns: repeat(12, 1fr)}
-    .card{grid-column: span 12;background:rgba(255,255,255,0.02);border:1px solid rgba(148,163,184,.06);border-radius: var(--radius);padding:18px;box-shadow:var(--shadow);position:relative;overflow:visible}
-    .card h2{margin:0 0 12px 0;font-size: clamp(18px, 3vw, 26px);display:flex;align-items:center;gap:12px}
-    .card .accent-bar{position:absolute;left:0;top:0;height:8px;width:60px;border-top-left-radius:var(--radius);border-bottom-right-radius:8px}
+    .card{
+      grid-column: span 12;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.15);
+      border-radius: var(--radius);
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .card h2{
+      margin:0 0 12px 0;
+      font-size: clamp(18px, 3.2vw, 28px);
+      display:flex;align-items:center;gap:10px;
+    }
+    .sentence{
+      margin:12px 0;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(15,23,42,.45);
+      border:1px solid rgba(148,163,184,.15);
+      cursor:pointer;
+      transition: background .25s;
+    }
+    .sentence:hover{background:rgba(30,41,59,.55)}
+    .translation{display:none;color:var(--muted);margin-top:6px;font-size:15px}
+    .sentence.open .translation{display:block}
+    .arrow{float:right;transition: transform .25s ease}
+    .sentence.open .arrow{transform:rotate(90deg)}
 
-    .sentence{background:rgba(255,255,255,0.02); border:1px solid rgba(148,163,184,.04); padding:14px; border-radius:12px; display:flex; flex-direction:column; gap:10px;margin-bottom:12px}
-    .sentence-text{line-height:1.5;font-size:1.02rem}
+    .attractions h2{color:var(--accent-blue)}
+    .facts h2{color:var(--accent-green)}
+    .population h2{color:var(--accent-orange)}
+    .map h2{color:var(--accent-purple)}
 
-    .translate-row{display:flex;gap:10px;align-items:center}
-    .translate-btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#032;font-weight:700;padding:8px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(34,211,248,.06);transition:transform .12s ease}
-    .translate-btn:active{transform:translateY(1px)}
-    .arrow{display:inline-block;transition:transform .24s cubic-bezier(.2,.9,.2,1)}
-    .speak-btn{background:transparent;border:1px solid rgba(148,163,184,.06);padding:8px;border-radius:999px;color:var(--muted);cursor:pointer}
+    .attractions{grid-column: span 7}
+    .facts{grid-column: span 5}
+    .population{grid-column: span 5}
+    .map{grid-column: span 7}
 
-    .translation{overflow:hidden;max-height:0;transition:max-height .34s cubic-bezier(.2,.9,.2,1),padding .28s; background:linear-gradient(180deg, rgba(255,255,255,.01), transparent);border-radius:10px;padding:0 12px;margin-top:6px;border:1px solid rgba(148,163,184,.04)}
-    .translation.open{padding:10px 12px;max-height:260px}
-    .translation p{margin:0;color:#e6eef7}
+    @media (max-width: 900px){
+      .attractions,.facts,.population,.map{grid-column: span 12}
+    }
 
-    .timeline{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
-    .timeline .event{flex:1;background:rgba(255,255,255,0.01);border:1px solid rgba(148,163,184,.04);padding:12px;border-radius:10px}
-    .timeline .year{font-weight:800;color:var(--accent-2);font-size:1.05rem}
+    .nyc-map{
+      margin-top:12px;
+      background:#0f172a;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.25);
+      display:flex;justify-content:center;
+    }
+    .nyc-map svg{width:160px;height:auto}
 
-    .quiz{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:12px;border-radius:10px;border:1px solid rgba(148,163,184,.04)}
-    .quiz h3{margin:0 0 8px 0}
-    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-    .option{background:rgba(255,255,255,0.02);border:1px solid rgba(148,163,184,.04);padding:10px;border-radius:8px;cursor:pointer}
-    .option.correct{border-color:var(--green);background:linear-gradient(90deg,rgba(52,211,153,0.08),transparent)}
-    .option.wrong{border-color:#fb7185;background:linear-gradient(90deg,rgba(251,113,133,0.04),transparent)}
+    .selfcheck{
+      margin-top:28px;
+      padding:20px;
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(148,163,184,.15);
+    }
+    .selfcheck h3{margin:0 0 12px 0}
+    .selfcheck label{display:block;margin:8px 0;cursor:pointer}
 
-    .chart{display:flex;gap:12px;align-items:center;margin-top:10px}
-    .chart svg{width:100%;max-width:480px;height:120px}
-
-    iframe{box-shadow:0 18px 50px rgba(2,6,23,.6);border-radius:10px;border:1px solid rgba(148,163,184,.04)}
-
-    .glossary{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:999px;border:1px solid rgba(148,163,184,.04);font-weight:700;color:var(--muted)}
-
-    footer{margin-top:30px;text-align:center}
-    footer .reflex{font-style:italic;color:var(--muted);margin-bottom:8px}
-    footer .credit{font-weight:900;font-size:1.15rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-
-    @media(max-width:900px){.grid{grid-template-columns:1fr}.timeline{flex-direction:column}}
+    footer{
+      margin-top:40px;
+      text-align:center;
+      font-weight:800;
+      font-size:18px;
+      color:#facc15;
+      text-shadow:0 0 8px rgba(250,204,21,.6);
+    }
   </style>
 </head>
 <body>
@@ -87,235 +120,105 @@
     </header>
 
     <div class="grid">
-      <section class="card">
-        <div class="accent-bar" style="background:linear-gradient(90deg,#34d399,#60a5fa)"></div>
-        <h2>🏞️ Top Attractions</h2>
-
+      <section class="card attractions">
+        <h2>🌊 Top Attractions</h2>
         <div class="sentence">
-          <div class="sentence-text">The Staten Island Ferry offers a free ride with panoramic views of Manhattan and the Statue of Liberty.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Die Staten Island Ferry bietet eine kostenlose Fahrt mit Panoramablick auf Manhattan und die Freiheitsstatue."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Die Staten Island Ferry bietet eine kostenlose Fahrt mit Panoramablick auf Manhattan und die Freiheitsstatue." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Staten Island Ferry offers a free ride with views of the skyline and the Statue of Liberty.
+          <span class="arrow">▶</span>
+          <div class="translation">Die Staten Island Ferry bietet eine kostenlose Fahrt mit Blick auf die Skyline und die Freiheitsstatue.</div>
         </div>
-
         <div class="sentence">
-          <div class="sentence-text">Snug Harbor Cultural Center & Botanical Garden is a historic campus with gardens, museums, and cultural programs for visitors of all ages.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Das Snug Harbor Cultural Center & Botanische Garten ist ein historisches Gelände mit Gärten, Museen und Kulturprogrammen für Besucher jeden Alters."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Das Snug Harbor Cultural Center und der Botanische Garten sind ein historisches Gelände mit Gärten, Museen und Kulturprogrammen für Besucher jeden Alters." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Snug Harbor Cultural Center & Botanical Garden features historic buildings, gardens, and museums.
+          <span class="arrow">▶</span>
+          <div class="translation">Das Snug Harbor Cultural Center & der Botanische Garten zeigen historische Gebäude, Gärten und Museen.</div>
         </div>
-
         <div class="sentence">
-          <div class="sentence-text">Historic Richmond Town is a living history village where colonial life is recreated through restored buildings and demonstrations.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Historic Richmond Town ist ein lebendiges Freilichtmuseum, in dem das koloniale Leben durch restaurierte Gebäude und Vorführungen dargestellt wird."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Historic Richmond Town ist ein lebendiges Freilichtmuseum, in dem das koloniale Leben durch restaurierte Gebäude und Vorführungen dargestellt wird." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Historic Richmond Town is a living history village that showcases colonial life.
+          <span class="arrow">▶</span>
+          <div class="translation">Historic Richmond Town ist ein Freilichtmuseum, das das koloniale Leben zeigt.</div>
         </div>
-
         <div class="sentence">
-          <div class="sentence-text">Fort Wadsworth lies beneath the Verrazzano-Narrows Bridge and preserves military sites with sweeping views of the harbor.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Fort Wadsworth liegt unter der Verrazzano-Narrows Bridge und bewahrt militärische Stätten mit weitem Blick über den Hafen."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Fort Wadsworth liegt unter der Verrazzano-Narrows Bridge und bewahrt militärische Stätten mit weitem Blick über den Hafen." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Fort Wadsworth beneath the Verrazzano-Narrows Bridge is one of the oldest military sites in the U.S.
+          <span class="arrow">▶</span>
+          <div class="translation">Fort Wadsworth unter der Verrazzano-Narrows Bridge ist eine der ältesten Militäranlagen der USA.</div>
         </div>
-
       </section>
 
-      <section class="card">
-        <div class="accent-bar" style="background:linear-gradient(90deg,#fbbf24,#38bdf8)"></div>
-        <h2>📌 Fast Facts</h2>
-
+      <section class="card facts">
+        <h2>📊 Fast Facts</h2>
         <div class="sentence">
-          <div class="sentence-text">Staten Island is nicknamed “The Borough of Parks” because of its many green spaces and nature preserves.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Staten Island trägt den Spitznamen ‚The Borough of Parks‘ wegen seiner vielen Grünflächen und Naturschutzgebiete."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Staten Island trägt den Spitznamen The Borough of Parks wegen seiner vielen Grünflächen und Naturschutzgebiete." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Staten Island is nicknamed “The Borough of Parks” because of its many green spaces.
+          <span class="arrow">▶</span>
+          <div class="translation">Staten Island wird wegen seiner vielen Grünflächen „The Borough of Parks“ genannt.</div>
         </div>
-
         <div class="sentence">
-          <div class="sentence-text">Todt Hill, rising about 410 feet (125 meters), is the highest natural point in New York City.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Der Todt Hill mit etwa 125 Metern Höhe ist der höchste natürliche Punkt in New York City."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Der Todt Hill mit etwa 125 Metern Höhe ist der höchste natürliche Punkt in New York City." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          The highest natural point in New York City is Todt Hill, located on Staten Island (~125 m).
+          <span class="arrow">▶</span>
+          <div class="translation">Der höchste Punkt in New York City ist der Todt Hill auf Staten Island (~125 m).</div>
         </div>
-
         <div class="sentence">
-          <div class="sentence-text">The Verrazzano-Narrows Bridge connects Staten Island to Brooklyn and serves as a major gateway to the city.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Die Verrazzano-Narrows Bridge verbindet Staten Island mit Brooklyn und dient als wichtiges Tor zur Stadt."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Die Verrazzano-Narrows Bridge verbindet Staten Island mit Brooklyn und dient als wichtiges Tor zur Stadt." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          The Verrazzano-Narrows Bridge connects Staten Island with Brooklyn.
+          <span class="arrow">▶</span>
+          <div class="translation">Die Verrazzano-Narrows Bridge verbindet Staten Island mit Brooklyn.</div>
         </div>
-
       </section>
 
-      <section class="card">
-        <div class="accent-bar" style="background:linear-gradient(90deg,#7c3aed,#38bdf8)"></div>
+      <section class="card population">
         <h2>👥 Population</h2>
-
         <div class="sentence">
-          <div class="sentence-text">According to the 2020 U.S. Census, Staten Island had about 495,747 residents, making it the least populous borough of New York City.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Laut der US-Volkszählung 2020 hatte Staten Island etwa 495.747 Einwohner und ist damit der am wenigsten bevölkerte Stadtbezirk von New York City."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Laut der US-Volkszählung 2020 hatte Staten Island etwa 495.747 Einwohner und ist damit der am wenigsten bevölkerte Stadtbezirk von New York City." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
-
-          <div class="chart" aria-hidden="true">
-            <svg viewBox="0 0 600 120" role="img" aria-label="Population comparison chart">
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
-                <linearGradient id="highlight" x1="0" x2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22c55e"/></linearGradient>
-              </defs>
-              <g font-family="Inter, Arial, sans-serif" font-size="11" fill="#cbd5e1">
-                <text x="8" y="18">Manhattan</text>
-                <rect x="110" y="6" width="460" height="14" rx="7" fill="url(#g1)"/>
-                <text x="8" y="44">Brooklyn</text>
-                <rect x="110" y="32" width="540" height="14" rx="7" fill="url(#g1)"/>
-                <text x="8" y="70">Queens</text>
-                <rect x="110" y="58" width="500" height="14" rx="7" fill="url(#g1)"/>
-                <text x="8" y="96">Bronx</text>
-                <rect x="110" y="84" width="360" height="14" rx="7" fill="url(#g1)"/>
-                <text x="8" y="122">Staten Island</text>
-                <rect x="110" y="110" width="270" height="14" rx="7" fill="url(#highlight)"/>
-                <text x="392" y="122" fill="#cbd5e1" font-size="11">~495k</text>
-              </g>
-            </svg>
-            <div class="note">Population comparison — Staten Island highlighted (approx.).</div>
-          </div>
-
+          Staten Island has about 495,747 residents according to the 2020 U.S. Census.
+          <span class="arrow">▶</span>
+          <div class="translation">Staten Island hat etwa 495.747 Einwohner laut der Volkszählung 2020.</div>
+        </div>
+        <div class="sentence">
+          It is the least populous of New York City’s five boroughs but one of the greenest by area.
+          <span class="arrow">▶</span>
+          <div class="translation">Es ist der bevölkerungsärmste Bezirk von New York City, aber einer der grünsten nach Fläche.</div>
         </div>
       </section>
 
-      <section class="card">
-        <div class="accent-bar" style="background:linear-gradient(90deg,#60a5fa,#22d3ee)"></div>
+      <section class="card map">
         <h2>🗺️ Where is it?</h2>
         <div class="sentence">
-          <div class="sentence-text">Staten Island lies southwest of Manhattan across New York Harbor and just north of New Jersey.</div>
-          <div class="translate-row">
-            <button class="translate-btn" data-translation="Staten Island liegt südwestlich von Manhattan am New Yorker Hafen und direkt nördlich von New Jersey."><span class="arrow">➜</span> Deutsch</button>
-            <button class="speak-btn" data-speech="Staten Island liegt südwestlich von Manhattan am New Yorker Hafen und direkt nördlich von New Jersey." title="Play German" aria-label="Play German pronunciation">🔊</button>
-          </div>
-          <div class="translation" aria-hidden="true"><p></p></div>
+          Staten Island lies southwest of Manhattan, across New York Harbor, and north of New Jersey.
+          <span class="arrow">▶</span>
+          <div class="translation">Staten Island liegt südwestlich von Manhattan, am New Yorker Hafen und nördlich von New Jersey.</div>
+        </div>
+        <div class="sentence">
+          The borough is connected to Brooklyn by the Verrazzano-Narrows Bridge and to New Jersey by several other bridges.
+          <span class="arrow">▶</span>
+          <div class="translation">Der Bezirk ist mit Brooklyn durch die Verrazzano-Narrows Bridge und mit New Jersey durch mehrere andere Brücken verbunden.</div>
         </div>
 
-        <iframe width="100%" height="320" style="border:0;margin-top:12px;border-radius:10px" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.33%2C40.47%2C-74.02%2C40.67&amp;layer=mapnik&amp;marker=40.58%2C-74.14" title="Staten Island map"></iframe>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:0.95rem">Tip: Click the "Deutsch" buttons to reveal polished German translations. Use the speaker icon to hear the German text spoken (works in modern browsers).</div>
-
-        <div class="glossary" aria-hidden="true">
-          <div class="chip">Ferry = Fähre</div>
-          <div class="chip">Borough = Stadtbezirk</div>
-          <div class="chip">Harbor = Hafen</div>
-          <div class="chip">Preserve = Schutzgebiet</div>
-          <div class="chip">Historic = historisch</div>
+        <div class="nyc-map">
+          <!-- Mini NYC Map with Staten Island highlighted -->
+          <svg viewBox="0 0 200 150">
+            <path d="M50 100 L70 110 L90 105 L85 125 L60 120 Z" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
+            <text x="60" y="115" font-size="10" fill="white">Staten Island</text>
+            <circle cx="130" cy="60" r="30" fill="rgba(255,255,255,0.05)" stroke="#94a3b8"/>
+            <text x="118" y="60" font-size="10" fill="#94a3b8">Manhattan</text>
+          </svg>
         </div>
-
-        <div class="timeline" aria-hidden="true">
-          <div class="event"><div class="year">1660</div><div class="desc">European settlement begins in the area around Staten Island.</div></div>
-          <div class="event"><div class="year">1760s</div><div class="desc">Richmond Town grows as a commercial and civic center.</div></div>
-          <div class="event"><div class="year">1861–1865</div><div class="desc">Fort Wadsworth plays a defensive role during the Civil War era.</div></div>
-          <div class="event"><div class="year">1964</div><div class="desc">Verrazzano-Narrows Bridge opens, connecting Staten Island to Brooklyn.</div></div>
-        </div>
-
-        <div class="quiz" aria-hidden="false">
-          <h3>Quick Quiz</h3>
-          <div>Which structure connects Staten Island to Brooklyn?</div>
-          <div class="options">
-            <button class="option" data-correct="false">Brooklyn Bridge</button>
-            <button class="option" data-correct="false">Manhattan Bridge</button>
-            <button class="option" data-correct="true">Verrazzano-Narrows Bridge</button>
-            <button class="option" data-correct="false">George Washington Bridge</button>
-          </div>
-          <div id="quiz-feedback" style="margin-top:10px;color:var(--muted)">Select an answer to check.</div>
-        </div>
-
       </section>
+    </div>
 
+    <div class="selfcheck card">
+      <h3>✅ Self-Check</h3>
+      <label><input type="checkbox"> I can name at least 2 attractions of Staten Island.</label>
+      <label><input type="checkbox"> I know why Staten Island is called “The Borough of Parks”.</label>
+      <label><input type="checkbox"> I can explain where Staten Island is located.</label>
     </div>
 
     <footer>
-      <div class="reflex">This poster was created to present Staten Island bilingually, combining geography, history, and language practice.</div>
-      <div class="reflex">Dieses Poster wurde zweisprachig gestaltet, um Geografie, Geschichte und Sprachpraxis zu verbinden.</div>
-      <div class="credit">Erstellt von Marlon Leuchtmann, Paul Weisenbilder — Klasse 8d</div>
+      Erstellt von Marlon Leuchtmann, Paul Weisenbilder 8d
     </footer>
   </div>
 
   <script>
-    // Translation toggle + smooth expand
-    document.querySelectorAll('.translate-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const sentence = btn.closest('.sentence');
-        const box = sentence.querySelector('.translation');
-        const p = box.querySelector('p');
-        p.textContent = btn.dataset.translation || '';
-        const open = box.classList.toggle('open');
-        box.setAttribute('aria-hidden', String(!open));
-        btn.querySelector('.arrow').style.transform = open ? 'rotate(90deg)' : 'rotate(0deg)';
-        btn.setAttribute('aria-pressed', String(open));
+    document.querySelectorAll('.sentence').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        el.classList.toggle('open');
       });
-    });
-
-    // Speech: use Web Speech API (if available)
-    document.querySelectorAll('.speak-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const text = btn.dataset.speech || '';
-        if (!('speechSynthesis' in window)) {
-          alert('Speech synthesis not supported in this browser.');
-          return;
-        }
-        // stop any current speech
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        // prefer a German voice if available
-        const voices = window.speechSynthesis.getVoices();
-        const german = voices.find(v => /de|german/i.test(v.lang)) || voices.find(v => /de|german/i.test(v.name));
-        if (german) utter.voice = german;
-        utter.rate = 0.95; utter.pitch = 1;
-        window.speechSynthesis.speak(utter);
-      });
-    });
-
-    // Quiz logic
-    document.querySelectorAll('.quiz .option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        const correct = opt.dataset.correct === 'true';
-        document.querySelectorAll('.quiz .option').forEach(o => { o.classList.remove('correct','wrong'); o.disabled = true; });
-        if (correct) {
-          opt.classList.add('correct');
-          document.getElementById('quiz-feedback').textContent = 'Correct — well done! ✅';
-        } else {
-          opt.classList.add('wrong');
-          const right = document.querySelector('.quiz .option[data-correct="true"]');
-          right.classList.add('correct');
-          document.getElementById('quiz-feedback').textContent = 'Not quite — the correct answer is highlighted.';
-        }
-      });
-    });
-
-    // small progressive enhancement: ensure voices are loaded for some browsers
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.getVoices();
-    }
-
-    // Parallax-ish slight movement for header on scroll
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const emoji = document.querySelector('header .emoji');
-      if (emoji) emoji.style.transform = `translateY(${Math.min(12, y/20)}px)`;
     });
   </script>
 </body>
