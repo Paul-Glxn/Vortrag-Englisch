@@ -19,6 +19,15 @@
   --radius: 18px;
   --neon: #0ff;
 }
+body.light-mode {
+  --bg: #e5e7eb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #0ea5e9;
+  --accent-2: #06b6d4;
+  --shadow: 0 10px 30px rgba(0,0,0,.15);
+}
 * { box-sizing: border-box; }
 body {
   margin:0; font-family: Inter, system-ui, sans-serif;
@@ -44,10 +53,15 @@ h1 { font-size: clamp(28px, 6vw, 56px); margin:0; line-height:1.05; }
   box-shadow: var(--shadow);
   position:relative;
   overflow:hidden;
-  transition: transform .3s, box-shadow .3s;
+  transition: transform .3s, box-shadow .3s, background .3s;
 }
-.card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.4); }
-.card h2 { margin:0 0 10px 0; font-size: clamp(18px, 3.2vw, 28px); cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+  background: linear-gradient(180deg, rgba(56,189,248,.05), rgba(56,189,248,.02));
+}
+.card h2 { margin:0 0 10px 0; font-size: clamp(18px, 3.2vw, 28px); cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition: color .3s, text-shadow .3s; }
+.card h2:hover { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 .card p, .card li { margin:0; color:#d1d5db; }
 .list { margin-top:6px; }
 .list li { background: rgba(15,23,42,.45); border:1px solid rgba(148,163,184,.15); padding:12px 14px; border-radius:14px; margin-bottom:8px; cursor:pointer; transition: background .3s; }
@@ -56,8 +70,8 @@ h1 { font-size: clamp(28px, 6vw, 56px); margin:0; line-height:1.05; }
 .translation { display:none; margin-top:4px; font-size:14px; color: var(--accent-2); }
 
 .gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px; }
-.gallery img { width:100%; height:200px; object-fit:cover; border-radius:14px; border:1px solid rgba(148,163,184,.25); transition: transform .3s; }
-.gallery img:hover { transform: scale(1.05); }
+.gallery img { width:100%; height:200px; object-fit:cover; border-radius:14px; border:1px solid rgba(148,163,184,.25); transition: transform .3s, box-shadow .3s; }
+.gallery img:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(56,189,248,.4); }
 
 .toggle-dark { position:fixed; top:16px; right:16px; background: var(--accent); color:#000; padding:10px 16px; border-radius:999px; cursor:pointer; font-weight:600; box-shadow: var(--shadow); }
 
@@ -67,6 +81,8 @@ footer {
 }
 
 .arrow { display:inline-block; transition: transform .25s ease; }
+
+.map iframe { border-radius: 12px; border: 2px solid var(--accent); }
 
 @media(max-width:900px){
   .attractions, .facts, .population, .map, .pictures{ grid-column: span 12; }
@@ -93,6 +109,8 @@ footer {
         <li>Snug Harbor Cultural Center & Botanical Garden showcase historic buildings and gardens. <span class="translation">→ Snug Harbor Cultural Center & Botanischer Garten zeigen historische Gebäude und Gärten.</span></li>
         <li>Historic Richmond Town presents colonial life with museums and live demonstrations. <span class="translation">→ Historic Richmond Town zeigt das koloniale Leben mit Museen und Vorführungen.</span></li>
         <li>Fort Wadsworth sits beneath the iconic Verrazzano-Narrows Bridge. <span class="translation">→ Fort Wadsworth liegt unter der berühmten Verrazzano-Narrows-Brücke.</span></li>
+        <li>Staten Island Greenbelt offers over 2000 acres of parks and hiking trails. <span class="translation">→ Staten Island Greenbelt bietet über 2000 Hektar Parkflächen und Wanderwege.</span></li>
+        <li>Staten Island Zoo features exotic animals and a reptile house. <span class="translation">→ Staten Island Zoo hat exotische Tiere und ein eigenes Reptilienhaus.</span></li>
       </ul>
     </section>
 
@@ -102,6 +120,9 @@ footer {
         <li>Nickname: “The Borough of Parks”. <span class="translation">→ Spitzname: „The Borough of Parks“.</span></li>
         <li>Todt Hill is the highest natural point in NYC (~125 m). <span class="translation">→ Todt Hill ist der höchste natürliche Punkt in NYC (~125 m).</span></li>
         <li>Verrazzano-Narrows Bridge connects Staten Island to Brooklyn. <span class="translation">→ Die Verrazzano-Narrows-Brücke verbindet Staten Island mit Brooklyn.</span></li>
+        <li>Staten Island has 26 km of coastline. <span class="translation">→ Staten Island hat 26 km Küstenlinie.</span></li>
+        <li>Staten Island is the greenest NYC borough with over 20% forest coverage. <span class="translation">→ Staten Island ist der grünste Bezirk NYCs mit über 20% Waldfläche.</span></li>
+        <li>Snug Harbor was originally a home for retired sailors. <span class="translation">→ Snug Harbor war ursprünglich ein Heim für pensionierte Seeleute.</span></li>
       </ul>
     </section>
 
@@ -141,12 +162,24 @@ toggle.forEach(li => {
 
 document.getElementById('darkToggle').addEventListener('click', ()=>{
   document.body.classList.toggle('light-mode');
-  if(document.body.classList.contains('light-mode')){
-    document.body.style.background = '#e5e7eb';
-    document.body.style.color = '#111827';
-  } else {
-    document.body.style.background = '';
-    document.body.style.color = '';
+});
+
+// Collapsible Cards
+const cards = document.querySelectorAll('.card h2');
+cards.forEach(h2 => {
+  const content = h2.nextElementSibling;
+  h2.addEventListener('click', () => {
+    if(content.style.display === 'none' || content.style.display === ''){
+      content.style.display = 'block';
+      h2.querySelector('.arrow').style.transform = 'rotate(180deg)';
+    } else {
+      content.style.display = 'none';
+      h2.querySelector('.arrow').style.transform = 'rotate(0deg)';
+    }
+  });
+  // start collapsed for lists/p content
+  if(h2.parentElement.querySelector('.list') || h2.parentElement.querySelector('p')){
+    content.style.display = 'none';
   }
 });
 </script>
