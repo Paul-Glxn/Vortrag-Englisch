@@ -3,8 +3,8 @@ Um Abschnitte zu lesen Doppelt Auf Feil drücken
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Staten Island — Ultimate Digital Poster um Abschnitte zu Öffnen Doppelt klicken</title>
-<meta name="description" content="A high-end interactive poster about Staten Island with attractions, facts, population, map, inline translations, dark/light mode, and hover animations." />
+<title>Staten Island — Ultimate Digital Poster</title>
+<meta name="description" content="Interactive poster about Staten Island with attractions, facts, translations, map, dark/light mode, and audio support." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -69,7 +69,9 @@ h1 { font-size: clamp(28px, 6vw, 56px); margin:0; line-height:1.05; }
 .list li { background: rgba(15,23,42,.45); border:1px solid rgba(148,163,184,.15); padding:12px 14px; border-radius:14px; margin-bottom:8px; cursor:pointer; transition: background .3s; }
 .list li:hover { background: rgba(15,23,42,.6); }
 
-.translation { display:none; margin-top:4px; font-size:14px; color: var(--accent-2); }
+.translation { display:none; margin-top:4px; font-size:14px; color: var(--accent-2); display:flex; align-items:center; gap:8px; }
+.speak-btn { cursor:pointer; font-size:16px; background: var(--accent); color:#000; border:none; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; box-shadow: var(--shadow); transition: transform .2s; }
+.speak-btn:hover { transform: scale(1.15); }
 
 .gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px; }
 .gallery img { width:100%; height:200px; object-fit:cover; border-radius:14px; border:1px solid rgba(148,163,184,.25); transition: transform .3s, box-shadow .3s; }
@@ -110,35 +112,91 @@ footer {
     <section class="card attractions">
       <h2>Top Attractions <span class="arrow">▼</span></h2>
       <ul class="list">
-        <li>Staten Island Ferry offers a free ride across New York Harbor. <span class="translation">→ Die Staten Island Fähre bietet eine kostenlose Fahrt über den New Yorker Hafen.</span></li>
-        <li>Snug Harbor Cultural Center & Botanical Garden showcase historic buildings and gardens. <span class="translation">→ Snug Harbor Cultural Center & Botanischer Garten zeigen historische Gebäude und Gärten.</span></li>
-        <li>Historic Richmond Town presents colonial life with museums and live demonstrations. <span class="translation">→ Historic Richmond Town zeigt das koloniale Leben mit Museen und Vorführungen.</span></li>
-        <li>Fort Wadsworth sits beneath the iconic Verrazzano-Narrows Bridge. <span class="translation">→ Fort Wadsworth liegt unter der berühmten Verrazzano-Narrows-Brücke.</span></li>
-        <li>Staten Island Greenbelt offers over 2000 acres of parks and hiking trails. <span class="translation">→ Staten Island Greenbelt bietet über 2000 Hektar Parkflächen und Wanderwege.</span></li>
-        <li>Staten Island Zoo features exotic animals and a reptile house. <span class="translation">→ Staten Island Zoo hat exotische Tiere und ein eigenes Reptilienhaus.</span></li>
+        <li>Staten Island Ferry offers a free ride across New York Harbor. 
+          <div class="translation">→ Die Staten Island Fähre bietet eine kostenlose Fahrt über den New Yorker Hafen. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Snug Harbor Cultural Center & Botanical Garden showcase historic buildings and gardens. 
+          <div class="translation">→ Snug Harbor Cultural Center & Botanischer Garten zeigen historische Gebäude und Gärten. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Historic Richmond Town presents colonial life with museums and live demonstrations. 
+          <div class="translation">→ Historic Richmond Town zeigt das koloniale Leben mit Museen und Vorführungen. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Fort Wadsworth sits beneath the iconic Verrazzano-Narrows Bridge. 
+          <div class="translation">→ Fort Wadsworth liegt unter der berühmten Verrazzano-Narrows-Brücke. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Staten Island Greenbelt offers over 2000 acres of parks and hiking trails. 
+          <div class="translation">→ Staten Island Greenbelt bietet über 2000 Hektar Parkflächen und Wanderwege. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Staten Island Zoo features exotic animals and a reptile house. 
+          <div class="translation">→ Staten Island Zoo hat exotische Tiere und ein eigenes Reptilienhaus. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
       </ul>
     </section>
 
     <section class="card facts">
       <h2>Fast Facts <span class="arrow">▼</span></h2>
       <ul class="list">
-        <li>Nickname: “The Borough of Parks”. <span class="translation">→ Spitzname: „The Borough of Parks“.</span></li>
-        <li>Todt Hill is the highest natural point in NYC (~125 m). <span class="translation">→ Todt Hill ist der höchste natürliche Punkt in NYC (~125 m).</span></li>
-        <li>Verrazzano-Narrows Bridge connects Staten Island to Brooklyn. <span class="translation">→ Die Verrazzano-Narrows-Brücke verbindet Staten Island mit Brooklyn.</span></li>
-        <li>Staten Island has 26 km of coastline. <span class="translation">→ Staten Island hat 26 km Küstenlinie.</span></li>
-        <li>Staten Island is the greenest NYC borough with over 20% forest coverage. <span class="translation">→ Staten Island ist der grünste Bezirk NYCs mit über 20% Waldfläche.</span></li>
-        <li>Snug Harbor was originally a home for retired sailors. <span class="translation">→ Snug Harbor war ursprünglich ein Heim für pensionierte Seeleute.</span></li>
+        <li>Nickname: “The Borough of Parks”.
+          <div class="translation">→ Spitzname: „The Borough of Parks“. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Todt Hill is the highest natural point in NYC (~125 m).
+          <div class="translation">→ Todt Hill ist der höchste natürliche Punkt in NYC (~125 m). 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Verrazzano-Narrows Bridge connects Staten Island to Brooklyn.
+          <div class="translation">→ Die Verrazzano-Narrows-Brücke verbindet Staten Island mit Brooklyn. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Staten Island has 26 km of coastline.
+          <div class="translation">→ Staten Island hat 26 km Küstenlinie. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Staten Island is the greenest NYC borough with over 20% forest coverage.
+          <div class="translation">→ Staten Island ist der grünste Bezirk NYCs mit über 20% Waldfläche. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
+        <li>Snug Harbor was originally a home for retired sailors.
+          <div class="translation">→ Snug Harbor war ursprünglich ein Heim für pensionierte Seeleute. 
+            <button class="speak-btn">🔊</button>
+          </div>
+        </li>
       </ul>
     </section>
 
     <section class="card population">
       <h2>Population <span class="arrow">▼</span></h2>
-      <p>Approx. 495,747 (2020 Census), the least populous NYC borough. <span class="translation">→ Ca. 495.747 (Volkszählung 2020), der am wenigsten bevölkerte Bezirk NYCs.</span></p>
+      <p>Approx. 495,747 (2020 Census), the least populous NYC borough. 
+        <div class="translation">→ Ca. 495.747 (Volkszählung 2020), der am wenigsten bevölkerte Bezirk NYCs. 
+          <button class="speak-btn">🔊</button>
+        </div>
+      </p>
     </section>
 
     <section class="card map">
       <h2>Where is it? <span class="arrow">▼</span></h2>
-      <p>Southwest of Manhattan, north of New Jersey, connected by bridges. <span class="translation">→ Südwestlich von Manhattan, nördlich von New Jersey, verbunden durch Brücken.</span></p>
+      <p>Southwest of Manhattan, north of New Jersey, connected by bridges. 
+        <div class="translation">→ Südwestlich von Manhattan, nördlich von New Jersey, verbunden durch Brücken. 
+          <button class="speak-btn">🔊</button>
+        </div>
+      </p>
       <iframe width="100%" height="300" style="border:0" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-74.33%2C40.47%2C-74.02%2C40.67&amp;layer=mapnik&amp;marker=40.58%2C-74.14"></iframe>
     </section>
 
@@ -157,14 +215,7 @@ footer {
 <footer>Erstellt Von Marlon Leuchtmann, Paul Weisenbilder 8d</footer>
 
 <script>
-const toggle = document.querySelectorAll('.list li');
-toggle.forEach(li => {
-  li.addEventListener('click', ()=> {
-    const trans = li.querySelector('.translation');
-    trans.style.display = trans.style.display === 'block' ? 'none' : 'block';
-  });
-});
-
+// Dark/Light Toggle
 document.getElementById('darkToggle').addEventListener('click', ()=>{
   document.body.classList.toggle('light-mode');
 });
@@ -182,9 +233,23 @@ cards.forEach(h2 => {
       h2.querySelector('.arrow').style.transform = 'rotate(0deg)';
     }
   });
-  if(h2.parentElement.querySelector('.list') || h2.parentElement.querySelector('p')){
-    content.style.display = 'none';
-  }
+  if(content){ content.style.display = 'none'; }
+});
+
+// Vorlese-Funktion
+function speak(text){
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'de-DE';
+  speechSynthesis.speak(utterance);
+}
+
+// Buttons aktivieren
+document.querySelectorAll('.speak-btn').forEach(btn => {
+  btn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const text = btn.parentElement.textContent.replace("→","").replace("🔊","").trim();
+    speak(text);
+  });
 });
 </script>
 </body>
